@@ -25,8 +25,6 @@ public class Cinema {
         int ticketPurchased = 0;
         NumberFormat formatter = new DecimalFormat("0.00");
 
-        int amountSeats = 0;
-
         do {
             System.out.println();
             System.out.println("1. Show the seats");
@@ -46,13 +44,9 @@ public class Cinema {
                  if (choice == 2) {
                      System.out.println("Enter a row number:");
                      rowNumber = sc.nextInt();
-                     //int rowNumber = 5;
                      System.out.println("Enter a seat number in that row:");
                      seatNumber = sc.nextInt();
-                     //int seatNumber = 5;;
 
-
-                     //Wrong input!
                      if (rowNumber > row | seatNumber > seats) {
                          System.out.println();
                          System.out.println("Wrong input!");
@@ -101,24 +95,18 @@ public class Cinema {
         }
         if (row * seats < 61) {
             ticket = 10;
-//            System.out.println("Total income:");
-//            System.out.println("$"+row*seats*10);
+
         }
         if (row * seats > 60 & row % 2 == 0) {
             if (rowNumber < row / 2 + 1) {
                 ticket = 10;
 
-//            System.out.println("Total income:");
-//            System.out.print("$");
-//            System.out.print((row/2*seats*10)+(row/2*seats*8));
             }
         }
         if (row * seats > 60 & row % 2 != 0) {
             if (rowNumber >= evenSecondHalf) {
                 ticket = 8;
-//            System.out.println("Total income:");
-//            System.out.print("$");
-//            System.out.println((row/2*seats*10)+(evenSecondHalf*seats*8));
+
             } else {
                 ticket = 10;
             }
@@ -180,10 +168,8 @@ public class Cinema {
             totalIncome = row / 2 * 10 * seats + evenSecondHalf * 8 * seats;
 
         }
-
         return totalIncome;
     }
-
 
     private static boolean endCondition(int choice) {
         boolean result = false;
