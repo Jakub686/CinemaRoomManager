@@ -1,6 +1,5 @@
 package cinema;
 
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Scanner;
@@ -11,18 +10,14 @@ public class Cinema {
         System.out.println("Enter the number of rows:");
         Scanner sc = new Scanner(System.in);
         int row = sc.nextInt();
-        //int row = 9;
-        int ticket = 0;
         System.out.println("Enter the number of seats in each row:");
         int seats = sc.nextInt();
-        //int seats = 9;
+        int ticket = 0;
         int evenSecondHalf = 0;
-        char[][] table = getTable(row, seats);
-        int seatNumber = 0;
-        int rowNumber = 0;
-        int choice = 0;
+        int seatNumber, rowNumber, choice;
         int ticketPurchasedNumber = 0;
         int ticketPurchased = 0;
+        char[][] table = getTable(row, seats);
         NumberFormat formatter = new DecimalFormat("0.00");
 
         do {
@@ -51,10 +46,9 @@ public class Cinema {
                          System.out.println();
                          System.out.println("Wrong input!");
                          System.out.println();
-                         //break label;
                          choice2EndCondition = true;
                          break choice;
-                     }else {choice2EndCondition = false;}
+                     }
 
                      if (table[rowNumber][seatNumber] == 'B') {
                          System.out.println("That ticket has already been purchased!");
@@ -64,7 +58,7 @@ public class Cinema {
 
                      if(table[rowNumber][seatNumber] == 'S'){
                          ticketPurchased = ticketPurchased + buyTicket(row, ticket, seats, evenSecondHalf, rowNumber);
-                         soldPlace(row, seats, table, rowNumber, seatNumber);
+                         soldPlace(table, rowNumber, seatNumber);
                          ticketPurchasedNumber++;
                      }
                  }
@@ -82,10 +76,10 @@ public class Cinema {
                 System.out.print(TotalIncome(row, seats));
                 System.out.println();
             }
-        } while (endCondition(choice) == false);
+        } while (!endCondition(choice));
     }
 
-    private static void soldPlace(int row, int seats, char[][] table, int rowNumber, int seatNumber) {
+    private static void soldPlace(char[][] table, int rowNumber, int seatNumber) {
         table[rowNumber][seatNumber] = 'B';
     }
 
@@ -148,7 +142,7 @@ public class Cinema {
     private static int TotalIncome(int row, int seats) {
         int evenSecondHalf = 0;
         int totalIncome = 0;
-        int[][] table = new int[row][seats];
+
 
 
         if (row % 2 != 0) {
@@ -172,12 +166,8 @@ public class Cinema {
     }
 
     private static boolean endCondition(int choice) {
-        boolean result = false;
-        if (choice == 0) {
-            result = true;
-        } else {
-            result = false;
-        }
+        boolean result;
+        result = choice == 0;
         return result;
     }
 }
